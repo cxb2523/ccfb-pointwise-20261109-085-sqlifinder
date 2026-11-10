@@ -64,9 +64,22 @@ def spider(url: str, maxPages: int) -> list[str]:
     Returns:
         list[str]: All unique URLs discovered across all crawled pages
     """
+    return [page_url for page_url, _html in spider_pages(url, maxPages)]
+
+
+def spider_pages(url: str, maxPages: int) -> list[tuple[str, str]]:
+    """Like spider(), but also returns the HTML of every visited page.
+
+    Args:
+        url (str): Starting URL
+        maxPages (int): Maximum number of pages to crawl
+
+    Returns:
+        list[tuple[str, str]]: (page_url, html) for each visited page
+    """
     pagesToVisit: list[str] = [url]
     visited: set[str] = set()
-    all_links: list[str] = []
+    results: list[tuple[str, str]] = []
     numberVisited = 0
 
     while numberVisited < maxPages and pagesToVisit:
@@ -78,13 +91,15 @@ def spider(url: str, maxPages: int) -> list[str]:
         visited.add(url)
 
         try:
-            _, links = LinkParser(url).getLinks(url)
+            htmlString, links = LinkParser(url).getLinks(url)
         except (URLError, HTTPError, ValueError):
             continue
+
+        if htmlString:
+            results.append((url, htmlString))
 
         for link in links:
             if link not in visited:
                 pagesToVisit.append(link)
-                all_links.append(link)
 
-    return all_links
+    return results
