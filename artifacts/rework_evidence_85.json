@@ -1,0 +1,17 @@
+{
+  "uid": "52",
+  "session_id": "7e6fa0bc-250d-45ff-85e8-b62825434f70",
+  "model": "auto_model/urm",
+  "context_window": 1000000,
+  "stream_file": "run_logs/claude_run_85.stream.jsonl",
+  "stream_sha256": "7bab8a791094b38dfdfd547688f9cb7d8b883e6e876b6d1e876d5b90209d19e2",
+  "raw_context_excerpt": "annotation_state/rework_context_raw_85.jsonl",
+  "same_session_cwd": "D:\\gsb-auto\\batches\\pointwise-20261109\\085-sqlifinder\\A",
+  "same_session_cli_version": "2.1.239",
+  "current_host_platform": "Windows-11-10.0.26300-SP0",
+  "evidence_basis": [
+    "Final stream modelUsage records contextWindow=1000000.",
+    "Raw session metadata records the same session cwd and CLI version.",
+    "The Windows drive-path cwd and current recorder host both identify Windows."
+  ]
+}
